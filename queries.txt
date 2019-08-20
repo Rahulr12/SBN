@@ -1,0 +1,2 @@
+insert_query::
+insert into tbl_user(name,email,mobile) values('vivek','viveksoni100@gmail.com',8866128862);

@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #DBFEFF;
+  font-family: sans-serif;
+}
+
+.container {
+  margin-top: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 380px;
+  height: 400px;
+  background-color: white;
+}
+.container .wrapper {
+  margin-right: auto;
+  margin-left: auto;
+  width: 85%;
+  height: 100%;
+}
+.container .wrapper h2 {
+  top: 30px;
+  position: relative;
+  text-align: center;
+  font-weight: 500;
+}
+.container .wrapper form {
+  margin-top: 50px;
+  background-color: white;
+  width: 100%;
+}
+.container .wrapper form .input-container {
+  margin-top: 20px;
+}
+.container .wrapper form .input-container label {
+  width: 100%;
+  display: block;
+  margin-left: 6px;
+  margin-bottom: 4px;
+  clear: both;
+  font-size: 12px;
+  color: #903FBF;
+  font-weight: 700;
+}
+.container .wrapper form .input-container input {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 8px;
+  display: block;
+  width: 95%;
+  height: 40px;
+  background-color: #F0E0FF;
+  border: none;
+}
+.container .wrapper form .input-container input::placeholder {
+  color: #903FBF;
+  font-size: 16px;
+}
+.container .wrapper form .input-container input:focus {
+  background-color: #E5CFFB;
+}
+.container .wrapper form button {
+  margin-top: 35px;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  width: 95%;
+  height: 50px;
+  border: none;
+  text-transform: uppercase;
+  background-color: #903FBF;
+  border: 1px solid #903FBF;
+  cursor: pointer;
+}
+.container .wrapper form button:hover {
+  background-color: white;
+  color: #903FBF;
+}
+.container .wrapper form a {
+  margin-top: 30px;
+  display: block;
+  text-align: center;
+  color: #903FBF;
+  font-weight: 700;
+  font-size: 14px;
+}

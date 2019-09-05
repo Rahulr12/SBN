@@ -18,6 +18,18 @@ $sitesession->Session();
     <title>Edit your profile : SBN</title>
     <? include("includes/style.php"); ?>
   </head>
+  <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyBnzedToDdeq9Ax0F2DyjmUsxyG0GdeLF0">
+  </script>
+  <script>
+    var ac = new google.maps.places.Autocomplete(window.HTMLInputElement('location'));
+    google.maps.event.addListener(ac, 'place_changed', function() {
+      var place = ac.getPlace();
+      console.log(place.formatted_address);
+      console.log(place.url);
+      console.log(place.geometry.location);
+    });
+  </script>
+  
   <body>
     <? include("includes/header.php"); ?>
     <div class="content content-fixed content-auth">
@@ -31,10 +43,10 @@ $sitesession->Session();
                     <a class="nav-link active" href="#">Profile Info</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <!-- <a class="nav-link" href="#">Link</a> -->
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
                   </li>
                 </ul>
               </div>
@@ -47,33 +59,43 @@ $sitesession->Session();
                     <tr>
                       <th scope="col" align="left"><label>First Name</label></th>
                       <th scope="col">
-                        <input type="text" name="FirstName" id="FirstName" class="form-control" placeholder="Enter your first name" value="" required>
+                        <input type="text" name="fistName" id="fistName" class="form-control" placeholder="Enter your first name" value="" required>
                       </th>
                       <th scope="col"></th>
                     </tr>
                     <tr>
                       <th scope="col"><label>Last Name</label></th>
-                      <th scope="col"><input type="text" name="LasttName" id="LastName" class="form-control" placeholder="Enter your last name" value="" required></th>
+                      <th scope="col"><input type="text" name="lastName" id="lastName" class="form-control" placeholder="Enter your last name" value="" required></th>
                       <th scope="col"></th>
                     </tr>
                     <tr>
                       <th scope="col"><label>Mobile</label></th>
-                      <th scope="col"><input type="text" name="MobileNumber" id="MobileNumber" class="form-control" placeholder="Enter your moblie number" minlength="10" maxlength="10" value="" required></th>
+                      <th scope="col"><input type="text" name="mobileNumber" id="mobileNumber" class="form-control" placeholder="Enter your moblie number" minlength="10" maxlength="10" value="" required></th>
                       <th scope="col"><label for="verified">Verified</label></th>
                     </tr>
                     <tr>
                       <th scope="col"><label>Email</label></th>
-                      <th scope="col"><input type="text" name="Email" id="Email" class="form-control" placeholder="Enter your Email address" value="" required></th>
+                      <th scope="col"><input type="text" name="email" id="email" class="form-control" placeholder="Enter your Email address" value="" required></th>
                       <th scope="col"><label for="forVerification">Click to Verify</label></th>
                     </tr>
                     <tr>
                       <th scope="col"><label>Location</label></th>
-                      <th scope="col"><input type="text" name="Location" id="Location" class="form-control" placeholder="Location" value="" required></th>
+                      <th scope="col"><textarea type="text" name="location" id="location" class="form-control" placeholder="Location" value="" required></textarea></th>
+                      <th scope="col"></th>
+                    </tr>
+                    <tr>
+                      <th scope="col"><label>State</label></th>
+                      <th scope="col"><input type="text" name="state" id="state" class="form-control" placeholder="State" value="" required></th>
+                      <th scope="col"></th>
+                    </tr>
+                    <tr>
+                      <th scope="col"><label>City</label></th>
+                      <th scope="col"><input type="text" name="city" id="city" class="form-control" placeholder="City" value="" required></th>
                       <th scope="col"></th>
                     </tr>
                     <tr>
                       <th scope="col">Profile Picture</th>
-                      <th scope="col"><input type="file" name="profilePicture" style="width: 200px"></th>
+                      <th scope="col"><input type="file" name="profilePicture" id="profilePicture" style="width: 250px"></th>
                       <th scope="col"></th>
                     </tr>
                     <tr>
@@ -88,7 +110,7 @@ $sitesession->Session();
                     </tr>
                     <tr>
                       <th scope="col">Occupation</th>
-                      <th scope="col"> <select name="Occupation" id="Occupation" style="width: 200px">
+                      <th scope="col"> <select name="occupation" id="occupation" style="width: 250px">
                                           <option value=""></option>
                                           <option value="BusinessOwner">Business Owner</option>
                                           <option value="Employee">Employee</option>
@@ -109,7 +131,7 @@ $sitesession->Session();
                     </tr>
                     <tr>
                       <th scope="col"><label>Headline</label></th>
-                      <th scope="col"><input type="text" name="Headline" id="Headline" class="form-control" placeholder="Enter your title" value="" required></th>
+                      <th scope="col"><input type="text" name="headline" id="headline" class="form-control" placeholder="Enter your title" value="" required></th>
                       <th scope="col"></th>
                     </tr>
                     <tr>

@@ -19,9 +19,8 @@ $sitesession->Session();
     <? include("includes/style.php"); ?>
   </head>
   <!-- try 2.0 -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnzedToDdeq9Ax0F2DyjmUsxyG0GdeLF0&libraries=places&callback=initAutocomplete"
-        async defer></script>
-  <!-- <script type="text/javascript">
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBnzedToDdeq9Ax0F2DyjmUsxyG0GdeLF0"></script>
+  <script type="text/javascript">
     function initialize() {
       var input = document.getElementById('location');
       var options = {
@@ -44,72 +43,8 @@ $sitesession->Session();
         })
       }//initializeEnds
       google.maps.event.addDomListener(window, "load", initialize);
-  </script> -->
-
-  <!-- fiddleTry -->
-  <script type="text/javascript">
-
-    var placeSearch, autocomplete;
-
-    var componentForm = {
-      street_number: 'short_name',
-      route: 'long_name',
-      locality: 'long_name',
-      administrative_area_level_1: 'short_name',
-      country: 'long_name',
-      postal_code: 'short_name'
-    };
-
-function geolocate() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var geolocation = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
-      var circle = new google.maps.Circle(
-          {center: geolocation, radius: position.coords.accuracy});
-      // autocomplete.setBounds(circle.getBounds());
-    });
-  }
-}//geolocaateEnds
-
-  function initAutocomplete() {
-    // Create the autocomplete object, restricting the search predictions to
-    // geographical location types.
-    autocomplete = new google.maps.places.Autocomplete(
-        document.getElementById('autocomplete'), {types: ['geocode']});
-
-    // Avoid paying for data that you don't need by restricting the set of
-    // place fields that are returned to just the address components.
-    autocomplete.setFields(['address_component']);
-
-    // When the user selects an address from the drop-down, populate the
-    // address fields in the form.
-    autocomplete.addListener('place_changed', fillInAddress);
-  }//initAutocompleteEnds
-
-  function fillInAddress() {
-    // Get the place details from the autocomplete object.
-    var place = autocomplete.getPlace();
-
-    for (var component in componentForm) {
-      document.getElementById(component).value = '';
-      document.getElementById(component).disabled = false;
-    }
-
-    // Get each component of the address from the place details,
-    // and then fill-in the corresponding field on the form.
-    for (var i = 0; i < place.address_components.length; i++) {
-      var addressType = place.address_components[i].types[0];
-      if (componentForm[addressType]) {
-        var val = place.address_components[i][componentForm[addressType]];
-        document.getElementById(addressType).value = val;
-      }
-    }
-  }//fillInAddressEnds
-
   </script>
+
   
   <body>
     <? include("includes/header.php"); ?>
@@ -161,7 +96,7 @@ function geolocate() {
                     </tr>
                     <tr>
                       <th scope="col"><label>Location</label></th>
-                      <th scope="col"><input type="text" name="autocomplete" id="autocomplete" class="form-control" placeholder="Location" value="" onFocus="geolocate()" required></th>
+                      <th scope="col"><input type="text" name="location" id="location" class="form-control" placeholder="Location" value="" required></th>
                       <th scope="col"></th>
                     </tr>
                     <tr>
@@ -175,13 +110,8 @@ function geolocate() {
                       <th scope="col"></th>
                     </tr>
                     <tr>
-                      <th scope="col"><label>Country</label></th>
-                      <th scope="col"><input type="text" name="country" id="country" class="form-control" placeholder="Country" value="" required></th>
-                      <th scope="col"></th>
-                    </tr>
-                    <tr>
                       <th scope="col">Profile Picture</th>
-                      <th scope="col"><input type="file" name="profilePicture" id="profilePicture" style="width: 350px"></th>
+                      <th scope="col"><input type="file" name="profilePicture" id="profilePicture" style="width: 250px"></th>
                       <th scope="col"></th>
                     </tr>
                     <tr>
@@ -196,7 +126,7 @@ function geolocate() {
                     </tr>
                     <tr>
                       <th scope="col">Occupation</th>
-                      <th scope="col"> <select name="occupation" id="occupation" style="width: 350px">
+                      <th scope="col"> <select name="occupation" id="occupation" style="width: 250px">
                                           <option value=""></option>
                                           <option value="BusinessOwner">Business Owner</option>
                                           <option value="Employee">Employee</option>

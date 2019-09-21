@@ -18,49 +18,67 @@ $sitesession->Session();
     <title>Edit your profile : SBN</title>
     <? include("includes/style.php"); ?>
   </head>
-  <!-- try 2.0 -->
+  <!-- fiddle try -->
+  <!-- jsfiddle apikey : AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk -->
+  <!-- Vivek apikey : AIzaSyBnzedToDdeq9Ax0F2DyjmUsxyG0GdeLF0 -->
+  <!-- Hardik apikey : AIzaSyBy43cdR8Qwzawh762nRG3SozbNBP5R5HI -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnzedToDdeq9Ax0F2DyjmUsxyG0GdeLF0&libraries=places&callback=initAutocomplete"
         async defer></script>
-  <!-- <script type="text/javascript">
-    function initialize() {
-      var input = document.getElementById('location');
-      var options = {
-        types: ['address'],
-        // componentRestrictions: {
-        //   country: 'us'
-        // }
-      };
-      autocomplete = new google.maps.places.Autocomplete(input, options);
-      autocomplete = new google.maps.places.Autocomplete(input, options);
-        google.maps.event.addListener(autocomplete, 'place_changed', function() {
-          var place = autocomplete.getPlace();
-          for (var i = 0; i < place.address_components.length; i++) {
-            for (var j = 0; j < place.address_components[i].types.length; j++) {
-              if (place.address_components[i].types[j] == "postal_code") {
-                document.getElementById('postal_code').innerHTML = place.address_components[i].long_name;
-              }
-            }
-          }
-        })
-      }//initializeEnds
-      google.maps.event.addDomListener(window, "load", initialize);
-  </script> -->
 
-  <!-- fiddleTry -->
-  <script type="text/javascript">
+<script type="text/javascript">
+var placeSearch, autocomplete;
 
-    var placeSearch, autocomplete;
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
 
-    var componentForm = {
-      street_number: 'short_name',
-      route: 'long_name',
-      locality: 'long_name',
-      administrative_area_level_1: 'short_name',
-      country: 'long_name',
-      postal_code: 'short_name'
-    };
+function initAutocomplete() {
+  // Create the autocomplete object, restricting the search predictions to
+  // geographical location types.
+  autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById('autocomplete'), {types: ['geocode']});
 
+  // Avoid paying for data that you don't need by restricting the set of
+  // place fields that are returned to just the address components.
+  autocomplete.setFields(['address_component']);
+
+  // When the user selects an address from the drop-down, populate the
+  // address fields in the form.
+  autocomplete.addListener('place_changed', fillInAddress);
+}//initAutocompleteEnds
+
+function fillInAddress() {
+  // Get the place details from the autocomplete object.
+  var place = autocomplete.getPlace();
+
+  for (var component in componentForm) {
+    document.getElementById(component).value = '';
+    document.getElementById(component).disabled = false;
+  }
+
+  // Get each component of the address from the place details,
+  // and then fill-in the corresponding field on the form.
+  for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+    if (componentForm[addressType]) {
+      var val = place.address_components[i][componentForm[addressType]];
+      document.getElementById(addressType).value = val;
+    }
+  }
+}//fillInAddressEnds
+
+// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
 function geolocate() {
+
+  autocomplete = new google.maps.places.Autocomplete(
+    document.getElementById('autocomplete'), {types: ['geocode']});
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var geolocation = {
@@ -69,48 +87,12 @@ function geolocate() {
       };
       var circle = new google.maps.Circle(
           {center: geolocation, radius: position.coords.accuracy});
-      // autocomplete.setBounds(circle.getBounds());
+        autocomplete.setBounds(circle.getBounds());
     });
   }
-}//geolocaateEnds
+}//geolocateEnds
+</script>
 
-  function initAutocomplete() {
-    // Create the autocomplete object, restricting the search predictions to
-    // geographical location types.
-    autocomplete = new google.maps.places.Autocomplete(
-        document.getElementById('autocomplete'), {types: ['geocode']});
-
-    // Avoid paying for data that you don't need by restricting the set of
-    // place fields that are returned to just the address components.
-    autocomplete.setFields(['address_component']);
-
-    // When the user selects an address from the drop-down, populate the
-    // address fields in the form.
-    autocomplete.addListener('place_changed', fillInAddress);
-  }//initAutocompleteEnds
-
-  function fillInAddress() {
-    // Get the place details from the autocomplete object.
-    var place = autocomplete.getPlace();
-
-    for (var component in componentForm) {
-      document.getElementById(component).value = '';
-      document.getElementById(component).disabled = false;
-    }
-
-    // Get each component of the address from the place details,
-    // and then fill-in the corresponding field on the form.
-    for (var i = 0; i < place.address_components.length; i++) {
-      var addressType = place.address_components[i].types[0];
-      if (componentForm[addressType]) {
-        var val = place.address_components[i][componentForm[addressType]];
-        document.getElementById(addressType).value = val;
-      }
-    }
-  }//fillInAddressEnds
-
-  </script>
-  
   <body>
     <? include("includes/header.php"); ?>
     <div class="content content-fixed content-auth">
@@ -161,26 +143,26 @@ function geolocate() {
                     </tr>
                     <tr>
                       <th scope="col"><label>Location</label></th>
-                      <th scope="col"><input type="text" name="autocomplete" id="autocomplete" class="form-control" placeholder="Location" value="" onFocus="geolocate()" required></th>
+                      <th scope="col"><input type="text" name="autocomplete" id="autocomplete" class="form-control" placeholder="Location" onFocus="geolocate()" required></th>
                       <th scope="col"></th>
                     </tr>
                     <tr>
                       <th scope="col"><label>State</label></th>
-                      <th scope="col"><input type="text" name="state" id="state" class="form-control" placeholder="State" value="" required></th>
+                      <th scope="col"><input name="administrative_area_level_1" id="administrative_area_level_1" class="form-control" placeholder="State" disabled="true"></th>
                       <th scope="col"></th>
                     </tr>
                     <tr>
                       <th scope="col"><label>City</label></th>
-                      <th scope="col"><input type="text" name="city" id="city" class="form-control" placeholder="City" value="" required></th>
+                      <th scope="col"><input name="locality" id="locality" class="form-control" placeholder="City" disabled="true"></th>
                       <th scope="col"></th>
                     </tr>
                     <tr>
                       <th scope="col"><label>Country</label></th>
-                      <th scope="col"><input type="text" name="country" id="country" class="form-control" placeholder="Country" value="" required></th>
+                      <th scope="col"><input name="country" id="country" class="form-control" placeholder="Country" disabled="true"></th>
                       <th scope="col"></th>
                     </tr>
                     <tr>
-                      <th scope="col">Profile Picture</th>
+                      <th scope="col">Profile Pic</th>
                       <th scope="col"><input type="file" name="profilePicture" id="profilePicture" style="width: 350px"></th>
                       <th scope="col"></th>
                     </tr>

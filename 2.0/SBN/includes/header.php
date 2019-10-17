@@ -1,7 +1,7 @@
  <header class="navbar navbar-header navbar-header-fixed">
   <a href="#" id="mainMenuOpen" class="burger-menu"><i data-feather="menu"></i></a>
   <div class="navbar-brand">
-    <a href="#" class="df-logo">SBN</a>
+    <a href="signup.php" class="df-logo">SBN</a>
   </div><!-- navbar-brand -->
   <div id="navbarMenu" class="navbar-menu-wrapper">
     <div class="navbar-menu-header">
@@ -40,8 +40,8 @@
   <? if ($_SESSION['SESSIONMOBILE']=="") { ?>
 
     <div class="d-flex">
-      <a href="signup" class="btn btn-xs btn-white flex-fill">Sign Up</a>
-      <a href="signin" class="btn btn-xs btn-primary flex-fill mg-l-10">Sign In</a>
+      <a href="signup.php" class="btn btn-xs btn-white flex-fill">Sign Up</a>
+      <a href="signin.php" class="btn btn-xs btn-primary flex-fill mg-l-10">Sign In</a>
     </div>
 
   <? } else { ?>
@@ -55,12 +55,12 @@
             <div class="avatar avatar-lg mg-b-15"><img src="assets/img/img1.png" class="rounded-circle" alt=""></div>
             <h6 class="tx-semibold mg-b-5"><?=$_SESSION['SESSIONNAME']?></h6>
 
-            <a href="#" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg> Edit Profile</a>
+            <a href="edit_profile.php" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg> Edit Profile</a>
             <a href="#" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> View Profile</a>
             <div class="dropdown-divider"></div>
            
            
-            <a href="signout" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>Sign Out</a>
+            <a href="signout.php" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>Sign Out</a>
           </div><!-- dropdown-menu -->
         </div>
 

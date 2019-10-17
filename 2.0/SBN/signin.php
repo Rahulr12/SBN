@@ -48,7 +48,7 @@ if ($_POST['btnsubmit']) {
 
             
 
-            ?><script>location.href="dashboard?SuccessID=<?=$id?>";</script><?
+            ?><script>location.href="dashboard.php?SuccessID=<?=$id?>";</script><?
           }
         }        
       }
@@ -64,7 +64,7 @@ if ($_POST['btnsubmit']) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:description" content="Create your SBN Account for Free!">
     <meta name="description" content="Create your SBN Account for Free!">
-    <title>Verify your mobile : (SBN) Satsang Business Network</title>
+    <title>(SBN) Satsang Business Network : Sign In</title>
     <? include("includes/style.php"); ?>
   </head>
   <body>
@@ -74,7 +74,7 @@ if ($_POST['btnsubmit']) {
         <div class="media align-items-stretch justify-content-center ht-100p">
           <div class="sign-wrapper mg-lg-r-50 mg-xl-r-60">
             <div class="pd-t-20 wd-100p  mg-b-40">
-              <h4 class="tx-color-01 mg-b-5 text-center">Signin</h4>
+              <h4 class="tx-color-01 mg-b-5 text-center">Sign in</h4>
               <hr>
               <p class="tx-color-03 tx-16 mg-b-40 text-center">Enter your mobile number and password.</p>
 

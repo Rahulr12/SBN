@@ -1,11 +1,10 @@
 <?php
 class Database {
 
-var $server   = "DB_SERVER"; //database server
-var $user     = "DB_USER"; //database login name
-var $pass     = "DB_PASS"; //database login password
-var $database = "DB_DATABASE"; //database name
-var $pre      = "TABLE_"; //table prefix
+var $server;
+var $user;
+var $pass;
+var $database;
 
 
 #######################
@@ -20,15 +19,13 @@ var $link_id = 0;
 var $query_id = 0;
 
 
-
 #-#############################################
 # desc: constructor
-function Database($server, $user, $pass, $database, $pre=''){
+function Database($server, $user, $pass, $database){
 	$this->server=$server;
 	$this->user=$user;
 	$this->pass=$pass;
 	$this->database=$database;
-	$this->pre=$pre;
 }#-#constructor()
 
 
@@ -285,6 +282,6 @@ function oops($msg='') {
 
 }//CLASS Database
 ###################################################################################################
-$db = new Database(DB_SERVER, DB_USER, DB_PASS, DB_DATABASE); 
+$db = new Database("localhost", "root", "", "sbn_db");
 $db->connect();
 ?>

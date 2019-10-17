@@ -61,7 +61,7 @@ if ($_POST['btnsubmit']) {
           $Error_Message = "Sorry, we are experiencing technical issues, try again later.";
         }else {
           $id = mysql_insert_id();
-          ?><script>location.href="mobile-verification?SuccessID=<?=$id?>";</script><?
+          ?><script>location.href="mobile-verification.php?SuccessID=<?=$id?>";</script><?
         }
 
       }

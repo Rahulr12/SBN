@@ -27,6 +27,7 @@ $sitesession->Session();
 
 <script type="text/javascript">
 var placeSearch, autocomplete;
+var locationString;
 
 var componentForm = {
   street_number: 'short_name',
@@ -36,6 +37,78 @@ var componentForm = {
   country: 'long_name',
   postal_code: 'short_name'
 };
+
+function submitBTNClicked(){
+
+  validationCheck();
+  uploadImage();
+
+}//submitBTNClickedEnds
+
+function uploadImage(){
+
+  $(document).ready(function() {
+    $('inputfile').change(function(){
+        var file_data = $('inputfile').prop('files')[0];   
+        var form_data = new FormData();                  
+        form_data.append('file', file_data);
+        $.ajax({
+            url: "imageUploadPHP.php",
+            type: "POST",
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(data){
+                console.log("Worked!!!");
+            }
+        });
+    });
+});
+
+}//uploadImageEnds
+
+function validationCheck(){
+
+  console.log("in validationCheck");
+  validateOccupation();
+  validateHeadline();
+
+}//validationCheckEnds
+
+function validateHeadline(){
+
+  var headlineTextBox = document.getElementById("headline");
+    if (headlineTextBox.value == "") {
+    alert("Please give yourself a headline");
+  }
+
+}//validateHeadline
+
+function validateOccupation(){
+
+  var validateSelectedOption = document.getElementById("occupation");
+    if (validateSelectedOption.selectedIndex == "") {
+    alert("Please select occupation");
+  }
+
+}//validateOccupation
+
+function fillStateCityCountry() {
+
+  locationString = document.getElementById('autocomplete').value;
+
+  var locationArr = locationString.split(',');
+  var lastIndex = locationArr.length - 1;
+  var country = locationArr[lastIndex];
+  var state = locationArr[lastIndex-1];
+  var city = locationArr[lastIndex-2];
+  
+  document.getElementById('locality').value = city;
+  document.getElementById('administrative_area_level_1').value = state;
+  document.getElementById('country').value = country;
+
+}//fillStateCityCountryEnds
 
 function initAutocomplete() {
   // Create the autocomplete object, restricting the search predictions to
@@ -143,17 +216,17 @@ function geolocate() {
                     </tr>
                     <tr>
                       <th scope="col"><label>Location</label></th>
-                      <th scope="col"><input type="text" name="autocomplete" id="autocomplete" class="form-control" placeholder="Location" onFocus="geolocate()" required></th>
-                      <th scope="col"></th>
-                    </tr>
-                    <tr>
-                      <th scope="col"><label>State</label></th>
-                      <th scope="col"><input name="administrative_area_level_1" id="administrative_area_level_1" class="form-control" placeholder="State" disabled="true"></th>
+                      <th scope="col"><input type="text" name="autocomplete" id="autocomplete" class="form-control" placeholder="Location" onFocus="geolocate()" onfocusout="fillStateCityCountry()" required></th>
                       <th scope="col"></th>
                     </tr>
                     <tr>
                       <th scope="col"><label>City</label></th>
                       <th scope="col"><input name="locality" id="locality" class="form-control" placeholder="City" disabled="true"></th>
+                      <th scope="col"></th>
+                    </tr>
+                    <tr>
+                      <th scope="col"><label>State</label></th>
+                      <th scope="col"><input name="administrative_area_level_1" id="administrative_area_level_1" class="form-control" placeholder="State" disabled="true"></th>
                       <th scope="col"></th>
                     </tr>
                     <tr>
@@ -163,8 +236,13 @@ function geolocate() {
                     </tr>
                     <tr>
                       <th scope="col">Profile Pic</th>
-                      <th scope="col"><input type="file" name="profilePicture" id="profilePicture" style="width: 350px"></th>
-                      <th scope="col"></th>
+                      <th scope="col">
+                        <!-- <form action="imageUpload.php" method="post" enctype="multipart/form-data"> -->
+                          <input type="file" name="inputfile" id="inputfile">
+                        <!-- </form> -->
+                      </th>
+                      <th scope="col"><!-- <input class="btn btn-primary" type="submit" value="Upload Image" name="submit"> --></th>
+                      <!-- style="display:none;" -->
                     </tr>
                     <tr>
                       <th scope="col" style="border-bottom: 1px solid  #a1b5c0;"></th>
@@ -179,7 +257,7 @@ function geolocate() {
                     <tr>
                       <th scope="col">Occupation</th>
                       <th scope="col"> <select name="occupation" id="occupation" style="width: 350px">
-                                          <option value=""></option>
+                                          <option value="empty"></option>
                                           <option value="BusinessOwner">Business Owner</option>
                                           <option value="Employee">Employee</option>
                                           <option value="Freelancer">Freelancer</option>
@@ -199,7 +277,7 @@ function geolocate() {
                     </tr>
                     <tr>
                       <th scope="col"><label>Headline</label></th>
-                      <th scope="col"><input type="text" name="headline" id="headline" class="form-control" placeholder="Enter your title" value="" required></th>
+                      <th scope="col"><input type="text" name="headline" id="headline" class="form-control" placeholder="Enter your title : i.e - Software Developer" value="" required></th>
                       <th scope="col"></th>
                     </tr>
                     <tr>
@@ -215,7 +293,7 @@ function geolocate() {
                   </thead>
                   </table>
 
-                <a href="#" class="btn btn-primary">Submit</a>
+                <a href="#" class="btn btn-primary" onclick="submitBTNClicked()">Submit</a>
               </div>
               </div>
 
